@@ -1,42 +1,37 @@
 import React from "react";
 import Link from "next/link";
 import { Avatar, AvatarGroup } from "@/components/ui/avatar";
+import { TableCell, TableRow } from "@/components/ui/table";
 import { Thread } from "@/features/threads/types";
+import { getRelativeTime } from "@/lib/utils/get-relative-time";
 
 export function ThreadItem(props: Thread) {
-  const { id, title, body, recentContributors, replies, views, activity } =
+  const { id, title, body, recentContributors, replies, views, createdAt } =
     props;
 
   const activityDate = React.useMemo(
-    () => new Date(activity).toLocaleDateString(),
-    [activity],
+    () => getRelativeTime(createdAt),
+    [createdAt],
   );
 
-  const stats = [replies, views, activityDate];
-
   return (
-    <Link
-      href={`/threads/${id}`}
-      className="grid grid-cols-12 items-center gap-x-8 bg-card p-4 text-card-foreground transition-colors hover:bg-muted"
-    >
-      <div className="col-span-7">
-        <h2 className="truncate text-xl font-semibold leading-none tracking-tight">
-          {title}
-        </h2>
-        <p className="mt-1 truncate text-sm text-muted-foreground">{body}</p>
-      </div>
-
-      <AvatarGroup className="col-span-2 flex justify-center">
-        {recentContributors.map(({ id, avatarUrl, username }) => (
-          <Avatar key={id} src={avatarUrl} alt={`${username}'s avatar`} />
-        ))}
-      </AvatarGroup>
-
-      {stats.map((stat, i) => (
-        <span key={i} className="col-span-1 flex justify-center font-medium">
-          {stat}
-        </span>
-      ))}
-    </Link>
+    <TableRow>
+      <TableCell className="max-w-sm transition-transform hover:translate-x-1 md:max-w-md lg:max-w-lg">
+        <Link href={`/threads/${id}`}>
+          <h2 className="truncate text-lg font-medium">{title}</h2>
+          <p className="truncate text-muted-foreground">{body}</p>
+        </Link>
+      </TableCell>
+      <TableCell className="hidden sm:table-cell">
+        <AvatarGroup>
+          {recentContributors.map(({ id, avatarUrl, username }) => (
+            <Avatar key={id} src={avatarUrl} alt={`${username}'s avatar`} />
+          ))}
+        </AvatarGroup>
+      </TableCell>
+      <TableCell className="hidden sm:table-cell">{replies}</TableCell>
+      <TableCell className="hidden md:table-cell">{views}</TableCell>
+      <TableCell className="hidden lg:table-cell">{activityDate} ago</TableCell>
+    </TableRow>
   );
 }

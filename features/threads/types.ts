@@ -9,5 +9,5 @@ export type Thread = {
   }[];
   replies: number;
   views: number;
-  activity: string;
+  createdAt: string;
 };

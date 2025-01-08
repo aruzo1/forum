@@ -24,7 +24,7 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 12,
     views: 150,
-    activity: "2025-01-07T10:30:00Z",
+    createdAt: "2025-01-07T10:30:00Z",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 8,
     views: 120,
-    activity: "2025-01-06T14:45:00Z",
+    createdAt: "2025-01-06T14:45:00Z",
   },
   {
     id: 3,
@@ -74,7 +74,7 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 15,
     views: 200,
-    activity: "2025-01-05T09:00:00Z",
+    createdAt: "2025-01-05T09:00:00Z",
   },
   {
     id: 4,
@@ -99,7 +99,7 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 5,
     views: 85,
-    activity: "2025-01-04T16:20:00Z",
+    createdAt: "2025-01-04T16:20:00Z",
   },
   {
     id: 5,
@@ -124,7 +124,7 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 20,
     views: 300,
-    activity: "2025-01-03T11:15:00Z",
+    createdAt: "2025-01-03T11:15:00Z",
   },
   {
     id: 6,
@@ -149,6 +149,6 @@ export const DUMMY_THREADS: Thread[] = [
     ],
     replies: 18,
     views: 250,
-    activity: "2025-01-02T08:45:00Z",
+    createdAt: "2025-01-02T08:45:00Z",
   },
 ];

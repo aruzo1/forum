@@ -1,4 +1,4 @@
-import { ThreadsList } from "@/features/threads/threads-list/threads-list";
+import { ThreadsList } from "@/features/threads/threads-list";
 import { DUMMY_THREADS } from "@/lib/constants";
 
 export default function Home() {
