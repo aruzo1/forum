@@ -1,13 +1,29 @@
+import { User } from "@/features/users/types";
+
 export type Thread = {
   id: number;
-  title: string;
+  parentId: number | null;
+  subject: string | null;
   body: string;
-  recentContributors: {
-    id: number;
-    username: string;
-    avatarUrl: string;
-  }[];
-  replies: number;
-  views: number;
+  recentContributors: User[] | null;
+  replies: number | null;
+  views: number | null;
+  author: User;
   createdAt: string;
 };
+
+export type ParentThread = Thread & {
+  parentId: null;
+  subject: string;
+  recentContributors: User[];
+  replies: number;
+  views: number;
+};
+
+export type SubThread = Thread & {
+  parentId: number;
+  subject: null;
+  recentContributors: null;
+  replies: null;
+  views: null;
+}

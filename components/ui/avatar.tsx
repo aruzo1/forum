@@ -2,12 +2,29 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function Avatar(props: React.ComponentProps<typeof Image>) {
+const sizeVariants = {
+  sm: 35,
+  md: 50,
+  lg: 60,
+};
+
+type AvatarProps = React.ComponentProps<typeof Image> & {
+  size?: number | keyof typeof sizeVariants;
+};
+
+export function Avatar({ size = sizeVariants["md"], ...props }: AvatarProps) {
+  const convertedSize = React.useMemo(
+    () => (typeof size === "number" ? size : sizeVariants[size]),
+    [size],
+  );
+
   return (
+    // eslint-disable-next-line jsx-a11y/alt-text
     <Image
-      width={30}
-      height={30}
-      className="rounded-full border border-2 border-card"
+      width={convertedSize}
+      height={convertedSize}
+      style={{ width: convertedSize, height: convertedSize }}
+      className="rounded-full border-2 border-background"
       {...props}
     />
   );

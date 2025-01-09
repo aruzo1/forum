@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import { DUMMY_THREADS } from "@/lib/constants";
+import { DUMMY_PARENT_THREADS } from "@/lib/constants";
 import { ThreadsList } from ".";
 
 describe("ThreadsList", () => {
   it("renders table headers", () => {
-    render(<ThreadsList threads={DUMMY_THREADS} />);
+    render(<ThreadsList threads={DUMMY_PARENT_THREADS} />);
 
     expect(screen.getByText("Topic")).toBeInTheDocument();
     expect(screen.getByText("Contributors")).toBeInTheDocument();
@@ -14,10 +14,10 @@ describe("ThreadsList", () => {
   });
 
   it("renders all threads with correct data", () => {
-    render(<ThreadsList threads={DUMMY_THREADS} />);
+    render(<ThreadsList threads={DUMMY_PARENT_THREADS} />);
 
-    DUMMY_THREADS.forEach(({ title, body, replies, views }) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
+    DUMMY_PARENT_THREADS.forEach(({ subject, body, replies, views }) => {
+      expect(screen.getByText(subject)).toBeInTheDocument();
       expect(screen.getByText(body)).toBeInTheDocument();
       expect(screen.getByText(replies)).toBeInTheDocument();
       expect(screen.getByText(views)).toBeInTheDocument();
@@ -25,9 +25,9 @@ describe("ThreadsList", () => {
   });
 
   it("renders contributors' avatars for each thread", () => {
-    render(<ThreadsList threads={DUMMY_THREADS} />);
+    render(<ThreadsList threads={DUMMY_PARENT_THREADS} />);
 
-    DUMMY_THREADS.forEach(({ recentContributors }) => {
+    DUMMY_PARENT_THREADS.forEach(({ recentContributors }) => {
       recentContributors.forEach(({ username }) => {
         expect(
           screen.getAllByAltText(`${username}'s avatar`)[0],
@@ -37,10 +37,10 @@ describe("ThreadsList", () => {
   });
 
   it("contains correct link to individual thread page", () => {
-    render(<ThreadsList threads={DUMMY_THREADS} />);
+    render(<ThreadsList threads={DUMMY_PARENT_THREADS} />);
 
-    DUMMY_THREADS.forEach(({ id, title }) => {
-      const link = screen.getByRole("link", { name: new RegExp(title, "i") });
+    DUMMY_PARENT_THREADS.forEach(({ id, subject }) => {
+      const link = screen.getByRole("link", { name: new RegExp(subject, "i") });
       expect(link).toHaveAttribute("href", `/threads/${id}`);
     });
   });

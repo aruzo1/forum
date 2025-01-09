@@ -5,11 +5,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Thread } from "@/features/threads/types";
+import { ParentThread } from "@/features/threads/types";
 import { ThreadItem } from "./thread-item";
 
 type ThreadsListProps = {
-  threads: Thread[];
+  threads: ParentThread[];
 };
 
 export function ThreadsList({ threads }: ThreadsListProps) {
